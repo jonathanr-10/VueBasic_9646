@@ -55,7 +55,7 @@
             hint: Math.floor(Math.random() * 10) + 1,
             kesempatan: 3,
             tebakan: 0,
-            menang: undefined,
+            benar: undefined,
             salah: undefined,
             kalah: undefined,
             mhs: {
@@ -85,7 +85,7 @@
             restart() {
                 this.hint = Math.floor((Math.random() * 10) + 1)
                 this.kesempatan = 3;
-                this.menang = undefined;
+                this.benar = undefined;
                 this.salah = undefined;
                 this.kalah = undefined;
                 location.reload();
