@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas8</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="col-4 justify-content-center mx-auto mt-4">
+            <div class="card p-4">
+                <div class="form-group">
+                    <p><strong>TO DO LIST</strong></p>
+                    <label for="judul">Name</label>
+                    <input type="text" class="form-control" id="judul">
+                </div>
+
+                <div class="form-group">
+                    <label for="prioritas">Priority</label>
+                    <select name="prioritas" id="prioritas" class="form-control">
+                        <option value=""></option>
+                        <option value="penting">Penting</option>
+                        <option value="biasa">Biasa</option>
+                        <option value="tidak penting">Tidak Penting</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="catatan">Note</label>
+                    <textarea class="form-control" id="catatan"></textarea>
+                </div>
+
+                <button class="btn btn-dark" @click="reset">Reset</button>
+                <br>
+                <button class="btn btn-primary" @click="save">Simpan</button>
+            </div>
+        </div>
+        <br><br><br>
+
+        <div class="container">
+            <h1>To Do List</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Judul</th>
+                        <th>Prioritas</th>
+                        <th>Catatan</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(todo,index) in todos" :key="index">
+                        <td>{{ todo.judul }}</td>
+                        
+                        <td>
+                            <span v-if="todo.prioritas == 'penting'"
+                                class="badge badge-light text-danger">{{ todo.prioritas }}</span>
+                            <span v-else-if="todo.prioritas == 'biasa'"
+                                class="badge badge-light text-primary">{{ todo.prioritas }}</span>
+                            <span v-else-if="todo.prioritas == 'tidak penting'"
+                                class="badge badge-light text-success">{{ todo.prioritas }}</span>
+                        </td>
+
+                        <td> {{ todo.catatan }}</td>
+
+                        <td>
+                            <span class="float-right"><button class="btn btn-sm"
+                            @click="hapus(index)">Delete</button></span>
+                        </td>
+                    </tr>   
+                </tbody>
+            </table>
+        </div>
+
+        <footer style="margin-left: 16cm;">
+            {{ mhs.nama }} | {{ mhs.npm }} | {{ mhs.kls }}
+        </footer>
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            judul: "",
+            prioritas: "",
+            catatan: "",
+
+            mhs: {
+                nama: 'Jonathan R',
+                npm: '180709646',
+                kls: 'PAW D',
+            },
+
+            todos: [
+
+            ],
+        },
+
+        methods: {
+            save() {
+                let todo = {
+                    judul: judul.value,
+                    prioritas: prioritas.value,
+                    catatan: catatan.value,
+                }
+                this.todos.push(todo);
+                this.reset()
+            },
+
+            hapus(index) {
+                this.todos.splice(index, 1);
+            },
+
+            reset() {
+                this.judul= "";
+                this.prioritas= "";
+                this.catatan= "";
+            },
+        },
+    });
+</script>
+
+</html>
